@@ -1,0 +1,169 @@
+[
+    {
+        "id": "352c14c5878acfd8",
+        "type": "tab",
+        "label": "Sinch Voice API",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "de31144f.01d448",
+        "type": "sinch-voice-incoming-call",
+        "z": "352c14c5878acfd8",
+        "application": "",
+        "endpoint": "",
+        "svaml": "{\"instructions\":[],\"action\":{\"name\":\"RunMenu\",\"barge\":true,\"menus\":[{\"id\":\"main\",\"mainPrompt\":\"#tts[Welcome to Sinch. You have two options, press 1 or 2]\",\"options\":[{\"dtmf\":\"1\",\"action\":\"return(option1)\"},{\"dtmf\":\"2\",\"action\":\"return(option2)\"}]}]}}",
+        "x": 550,
+        "y": 400,
+        "wires": [
+            [
+                "87e5a492.af0318",
+                "550945e2.9863cc"
+            ]
+        ]
+    },
+    {
+        "id": "87e5a492.af0318",
+        "type": "sinch-voice-dtmf",
+        "z": "352c14c5878acfd8",
+        "action": "option1",
+        "svaml": "{    \"instructions\": [        {            \"name\": \"say\",            \"text\": \"Hello, this is a text-to-speech message.\",            \"locale\": \"en-US\"        }    ]}",
+        "x": 970,
+        "y": 360,
+        "wires": [
+            [
+                "101f0ef8.fe6f51"
+            ]
+        ]
+    },
+    {
+        "id": "550945e2.9863cc",
+        "type": "sinch-voice-dtmf",
+        "z": "352c14c5878acfd8",
+        "action": "option2",
+        "svaml": "{\n    \"instructions\": [\n        {\n            \"name\": \"say\",\n            \"text\": \"Hello, this is a text-to-speech message.\",\n            \"locale\": \"en-US\"\n        }\n    ]\n}",
+        "x": 970,
+        "y": 440,
+        "wires": [
+            [
+                "c72328f1.fba0e8"
+            ]
+        ]
+    },
+    {
+        "id": "101f0ef8.fe6f51",
+        "type": "debug",
+        "z": "352c14c5878acfd8",
+        "name": "debug node",
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "c72328f1.fba0e8",
+        "type": "debug",
+        "z": "352c14c5878acfd8",
+        "name": "debug node",
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "e6feda7a.90f418",
+        "type": "sinch-voice-call",
+        "z": "352c14c5878acfd8",
+        "name": "sinch-voice-call node",
+        "application": "",
+        "destinationEndpoint": "",
+        "cli": "",
+        "destinationType": "number",
+        "svaml": "",
+        "text": "Hello, this is a message from Sinch",
+        "dtmf": "",
+        "prompts": "",
+        "messageType": "text",
+        "locale": "en-US",
+        "debug": false,
+        "x": 825,
+        "y": 615,
+        "wires": [
+            [
+                "9c065b1e.5fb728"
+            ],
+            [
+                "fa63809f.86565"
+            ]
+        ]
+    },
+    {
+        "id": "7efd3e1e.c036c",
+        "type": "inject",
+        "z": "352c14c5878acfd8",
+        "name": "inject node",
+        "props": [
+            {
+                "p": "",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 1,
+        "topic": "",
+        "x": 540,
+        "y": 615,
+        "wires": [
+            [
+                "e6feda7a.90f418"
+            ]
+        ]
+    },
+    {
+        "id": "9c065b1e.5fb728",
+        "type": "debug",
+        "z": "352c14c5878acfd8",
+        "name": "debug node",
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "fa63809f.86565",
+        "type": "debug",
+        "z": "352c14c5878acfd8",
+        "name": "debug node",
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 640,
+        "wires": []
+    }
+]

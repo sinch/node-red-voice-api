@@ -1,0 +1,67 @@
+<script type="text/html" data-help-name="sinch-voice-call">
+  <p>
+    Initiates an outbound voice call using the Sinch Voice API.
+  </p>
+  <h2>Configuration</h2>
+    <dl class="message-properties">
+      <dt>destinationEndpoint
+          <span class="property-type">string</span>
+      </dt>
+      <dd>
+        The recipient number or username that should be called.
+      </dd>
+      <dt>destinationType
+       <span class="property-type">string</span>
+      </dt>
+      <dd>
+        The type of the destination endpoint. It can be <em>number</em> for PSTN endpoints, or <em>username</em> for data endpoints (app or web clients).
+      </dd>
+      <dt>cli
+       <span class="property-type">string</span>
+      </dt>
+      <dd>
+        the number that will be displayed as the caller (Sinch numbers only)
+      </dd>
+      <dt>svaml
+       <span class="property-type">string</span>
+      </dt>
+      <dd>
+        Sinch Voice Application Markup Language, see the <a href="https://developers.sinch.com/docs/voice/api-reference/svaml/" target="_blank">SVAML documentation</a>
+      </dd>
+      <dt>messageType
+       <span class="property-type">string</span>
+      </dt>
+      <dd>
+        Type of message to send, could be: <em>text</em>, <em>prompts</em>, <em>DTMF</em>, <em>SVAML</em>
+      </dd>
+    </dl>
+  <h2>Example</h2>
+  <p>
+    A <code>Voice Call</code> node can place simple calls using plain text, <em>DTMF</em>, SVAML or prompts, see the 
+    <a href="https://developers.sinch.com/docs/voice-rest-api-calling-api#text-to-speech-callout" target="_blank">Sinch Voice API documentation </a>
+    for more details.
+  </p>
+  <p>
+    Use SVAML to make more complex interactions with the call, like forwarding, recording, interactive voice responses, etc.
+  </p>
+  <h2>Output</h2>
+  <p>
+    When the call is completed, a message is sent through the first output if the call is successful or to the
+    second output if it failed (user didn't aswer, callee hangup, no connection, etc).
+    The following properties are passed to the node output:
+    <pre>
+{
+  voiceCall: {
+    // the unique id of the call
+    callId,
+    // the caller number
+    from,
+    // the Sinch number called
+    to,
+},
+  // the raw response from Voice APIs
+  payload: msg,
+}
+    </pre>
+  </p>
+</script>

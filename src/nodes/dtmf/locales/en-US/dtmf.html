@@ -1,0 +1,41 @@
+<script type="text/html" data-help-name="sinch-voice-dtmf">
+  <p>
+    Captures the DTMF (Dual Tone Multi Frequency) keypad (0-9, * and #) input from the user response.
+  </p>
+  <h2>Configuration</h2>
+  <dl class="message-properties">
+    <dt>
+     action <span class="property-type">string</span>
+    </dt>
+    <dd>
+      The action this node answer to. Must match one of the options (<code>return(*)</code>) in the <code>RunMenu</code> defined using <em>SVAML</em> in a previous voice message.
+    </dd>
+    <dt>
+     svaml <span class="property-type">string</span>
+    </dt>
+    <dd>
+      Sinch Voice Application Markup Language, see the <a href="https://developers.sinch.com/docs/voice/api-reference/svaml/" target="_blank">SVAML documentation</a>
+    </dd>
+  </dl>
+
+  <h2>Output</h2>
+  <p>
+    This node is generally connected to a <code>Incoming Call</code> node. When the related key is pressed in the caller/callee
+    handest, the <em>SVAML</em> is returned to the phone (it could be another <em>IVR</em>) and a message is emitted through
+    the node output:
+    <pre>
+{
+  voiceCall: {
+    // the unique id of the call
+    callId,
+    // the caller number
+    from,
+    // the Sinch number called
+    to,
+},
+  // the raw response from Voice APIs
+  payload: msg,
+}
+    </pre>
+  </p>
+</script>

@@ -1,0 +1,58 @@
+<script type="text/javascript">
+  RED.nodes.registerType("sinch-voice-incoming-call", {
+    category: "Sinch Voice",
+    color: "#FFBE3C",
+
+    defaults: {
+      application: { value: "", type: "sinch-application" },
+      endpoint: { value: "", required: true },
+      svaml: { value: "pstn", required: false },
+    },
+    inputs: 0,
+    outputs: 1,
+    icon: "icons/incoming.svg",
+    paletteLabel: function() {
+      return this._("node-label") || "Incoming Voice Call";
+    },
+    label: function() {
+      var label = this.name || this._("node-label") || "Incoming Voice Call";
+      return (
+        label +
+        (this.endpoint != null && this.endpoint !== ""
+          ? " (" + this.endpoint + ")"
+          : "")
+      );
+    },
+    oneditprepare: function() {
+      $("#node-input-svaml")
+        .typedInput({
+          types: ["json"],
+          default: "json",
+        })
+        .typedInput("width", "100%");
+    },
+    oneditsave: function() {},
+  });
+</script>
+
+<script type="text/html" data-template-name="sinch-voice-incoming-call">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="name"></span></label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-application"><span data-i18n="application"></span></label>
+    <input type="text" id="node-input-application">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-endpoint"><span data-i18n="endpoint"></span></label>
+    <input type="text" id="node-input-endpoint" placeholder="+46 000 00 00 00">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-svaml">SVAML</label>
+    <input type="text" id="node-input-svaml">
+  </div>
+</script>

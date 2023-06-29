@@ -1,0 +1,44 @@
+<script type="text/html" data-help-name="sinch-voice-answered-call-event">
+    <p>
+      Stores a SVAML for a call (inbound or outbound) in case of an ACE (Answered Call Event).
+    </p>
+    <h2>Configurations</h2>
+    <dl class="message-properties">
+    <dt>svaml
+        <span class="property-type">obejct</span>
+    </dt>
+    </dl>
+    <h2>Example</h2>
+    <p>
+    This node is generally used in scenarios where the SVAML is dynamically generated. 
+    In that case leave the SVAML field blank in the Incoming Call node
+    and connect it to this Answered Call Event node. The SVAML can either be configured 
+    in the node configuration or be provided from an upstream node on <code>msg.svaml</code>.
+    </p>
+
+<pre>
+msg.svaml = {
+  "action": {
+    "name": "connectSip",
+    "destination": {
+      "endpoint": "1011@c1duoph005346.sbc1-au-s2.cc.sinch.com:5061;transport=tls",
+      "type": "Sip"
+    },
+    "maxDuration": 3000,
+    "transport": "tls",
+    "suppressCallbacks": false,
+    "callHeaders": [
+      {
+        "key": "foo",
+        "value": "bar"
+      },
+      {
+        "key": "baz",
+        "value": "qux"
+      }
+    ]
+  }
+};
+return msg;
+</pre>
+</script>

@@ -1,0 +1,40 @@
+{
+  "name": "@sinch/node-red-voice-api",
+  "version": "1.0.0",
+  "author": "Sinch AB",
+  "description": "Package of Sinch Voice API nodes for Node-RED",
+  "homepage": "https://www.sinch.com/",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sinch/node-red-voice-api.git"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --ignore-path .gitignore --ext .js .",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "node-red": {
+    "version": ">=3.0.0",
+    "nodes": {
+      "sinch-ace": "src/nodes/ace/ace.js",
+      "sinch-call": "src/nodes/call/call.js",
+      "sinch-dtmf": "src/nodes/dtmf/dtmf.js",
+      "sinch-incoming": "src/nodes/incoming/incoming.js",
+      "sinch-application": "src/configuration-nodes/application/application.js"
+    }
+  },
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "eslint-config-nodejs": "2.0.0",
+    "eslint-config-prettier": "6.2.0",
+    "eslint-plugin-html": "5.0.5",
+    "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-security": "1.4.0",
+    "node-red": "3.0.2",
+    "prettier": "1.18.2"
+  },
+  "dependencies": {
+    "sinch-request": "^0.0.8",
+    "v8n": "^1.5.1"
+  }
+}

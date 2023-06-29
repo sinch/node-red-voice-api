@@ -1,0 +1,19 @@
+{
+  "node-label": "Voice Call",
+  "message-type-text": "Text",
+  "message-type-prompts": "Prompts",
+  "message-type-dtmf": "DTMF",
+  "message-type-svaml": "SVAML",
+  "debug": "Debug",
+  "output-0": "Call successful",
+  "output-1": "Call failed (hang-up, busy, etc)",
+  "locale": "Locale",
+  "text": "Text",
+  "prompts": "Prompts",
+  "type": "Type",
+  "endpoint": "Endpoint",
+  "application": "Application",
+  "name": "Name",
+  "number": "number",
+  "username": "username"
+}

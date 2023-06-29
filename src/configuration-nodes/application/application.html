@@ -1,0 +1,55 @@
+<script type="text/javascript">
+  RED.nodes.registerType('sinch-application', {
+    category: 'config',
+    defaults: {
+      applicationName: {
+        value: '',
+        required: true,
+      },
+      applicationKey: {
+        value: '',
+        required: true,
+      },
+      applicationSecret: {
+        value: '',
+        required: true,
+      },
+    },
+    credentials: {
+      applicationSecret: {
+        type: 'text',
+        required: true,
+      },
+    },
+    label: function() {
+      return this.applicationName;
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="sinch-application">
+  <div class="form-row">
+    <label for="node-config-input-applicationName">
+      <i class="fa fa-tag"></i> <span data-i18n="application-name"></span>
+    </label>
+    <input type="text" id="node-config-input-applicationName" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-config-input-applicationKey">
+      <span data-i18n="application-key"></span>
+    </label>
+    <input type="text" id="node-config-input-applicationKey" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-config-input-applicationSecret">
+      <span data-i18n="application-secret"></span>
+    </label>
+    <input type="password" id="node-config-input-applicationSecret" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="sinch-application">
+  <p>Sinch Application</p>
+</script>

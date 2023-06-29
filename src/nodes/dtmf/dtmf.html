@@ -1,0 +1,51 @@
+
+<script type="text/javascript">
+  RED.nodes.registerType('sinch-voice-dtmf', {
+    category: 'Sinch Voice',
+    color: '#FFBE3C',
+    defaults: {
+      action: { value: '', required: true },
+      svaml: { value: 'pstn', required: false },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'icons/dtmf.svg',
+    paletteLabel: function() {
+      return this._('node-label') || 'DTMF Answer';
+    },
+    label: function() {
+      var name = this.name || this._('node-label') || 'DTMF Answer';
+      return (
+        name +
+        (this.action != null && this.action !== ''
+          ? ' (' + this.action + ')'
+          : '')
+      );
+    },
+    oneditprepare: function() {
+      $('#node-input-svaml')
+        .typedInput({
+          types: ['json'],
+          default: 'json',
+        })
+        .typedInput('width', '100%');
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="sinch-voice-dtmf">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="name"></span></label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-action"><span data-i18n="action"></span></label>
+    <input type="text" id="node-input-action" placeholder="">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-svaml"> SVAML</label>
+    <input type="text" id="node-input-svaml">
+  </div>
+</script>

@@ -1,0 +1,175 @@
+<script type="text/javascript">
+  RED.nodes.registerType("sinch-voice-call", {
+    category: "Sinch Voice",
+    color: "#FFBE3C",
+    defaults: {
+      name: { value: "" },
+      application: { value: "", type: "sinch-application" },
+      destinationEndpoint: { value: "", required: true },
+      cli: { value: "", required: false },
+      destinationType: { value: "pstn", required: true },
+      svaml: { value: "number", required: false },
+      text: { value: "", required: false },
+      dtmf: { value: "", required: false },
+      prompts: { value: "", required: false },
+      messageType: { value: "text", required: false },
+      locale: { value: "en-US", required: false },
+      debug: { value: false, required: false },
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: function(index) {
+      return this._("output-" + index);
+    },
+    icon: "icons/voice_call.svg",
+    paletteLabel: function() {
+      return this._("node-label") || "Voice Call";
+    },
+    label: function() {
+      return this.name || this._("node-label") || "Voice Call";
+    },
+    oneditprepare: function() {
+      $("#node-input-svaml")
+        .typedInput({
+          types: ["json"],
+          default: "json",
+        })
+        .typedInput("width", "100%");
+
+      $("#node-input-destinationType").change(function() {
+        var type = $(this).val();
+
+        $("#node-input-destinationEndpoint").prop(
+          "placeholder",
+          type === "number" ? "+46000000000" : "myusername"
+        );
+      });
+
+      $("#node-input-messageType").change(function() {
+        $("#dialog-form .form-row-type").hide();
+        $(
+          "#dialog-form .form-row-type-" +
+            $(this)
+              .val()
+              .toLowerCase()
+        ).show();
+      });
+
+      $("#dialog-form .form-row-type-" + this.messageType.toLowerCase()).show();
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="sinch-voice-call">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="name"></span></label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-application"><span data-i18n="application"></span></label>
+    <input type="text" id="node-input-application">
+  </div>
+
+  <div class="form-row form-row-destination" >
+    <label for="node-input-destinationEndpoint"><span data-i18n="endpoint"></span></label>
+    <select id="node-input-destinationType">
+      <option value="number" data-i18n="number"></option>
+      <option value="username" data-i18n="username">username</option>
+    </select>
+    <input type="text" id="node-input-destinationEndpoint" placeholder="+46000000000">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-cli">CLI</label>
+    <input type="text" id="node-input-cli" placeholder="+46000000000">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-messageType"><span data-i18n="type"></span></label>
+    <select id="node-input-messageType">
+      <option value="text" data-i18n="message-type-text"></option>
+      <option value="prompts" data-i18n="message-type-prompts"></option>
+      <option value="dtmf" data-i18n="message-type-dtmf"></option>
+      <option value="svaml" data-i18n="message-type-svaml"></option>
+    </select>
+  </div>
+
+  <div class="form-row form-row-type form-row-type-svaml">
+    <label for="node-input-svaml">SVAML</label>
+    <input type="text" id="node-input-svaml" placeholder="SVAML (remove)">
+  </div>
+
+  <div class="form-row form-row-type form-row-type-dtmf">
+    <label for="node-input-dtmf">DTMF</label>
+    <input type="text" id="node-input-dtmf" placeholder="#0123">
+  </div>
+
+  <div class="form-row form-row-type form-row-type-prompts">
+    <label for="node-input-prompts"><span data-i18n="prompts"></span></label>
+    <textarea id="node-input-prompts" placeholder="#tts[Hello world]"></textarea>
+  </div>
+
+  <div class="form-row form-row-type form-row-type-text">
+    <label for="node-input-text"><span data-i18n="text"></span></label>
+    <input type="text" id="node-input-text" placeholder="Hello world">
+  </div>
+
+  <div class="form-row form-row-type form-row-type-text form-row-type-prompts">
+    <label for="node-input-locale"><span data-i18n="locale"></span></label>
+    <select id="node-input-locale">
+      <option value="cmn-CN">Chinese, Mandarin</option>
+      <option value="da-DK">Danish</option>
+      <option value="nl-NL">Dutch</option>
+      <option value="en-AU">English, Australian</option>
+      <option value="en-GB">English, British</option>
+      <option value="en-IN">English, Indian</option>
+      <option value="en-US">English, US</option>
+      <option value="en-GB-WLS">English, Welsh</option>
+      <option value="fr-FR">French</option>
+      <option value="fr-CA">French, Canadian</option>
+      <option value="hi-IN">Hindi</option>
+      <option value="de-DE">German</option>
+      <option value="is-IS">Icelandic</option>
+      <option value="it-IT">Italian</option>
+      <option value="ja-JP">Japanese</option>
+      <option value="ko-KR">Korean</option>
+      <option value="nb-NO">Norwegian</option>
+      <option value="pl-PL">Polish</option>
+      <option value="pt-BR">Portuguese, Brazilian</option>
+      <option value="pt-PT">Portuguese, European</option>
+      <option value="ro-RO">Romanian</option>
+      <option value="ru-RU">Russian</option>
+      <option value="es-ES">Spanish, European</option>
+      <option value="es-MX">Spanish, Mexican</option>
+      <option value="es-US">Spanish, US</option>
+      <option value="sv-SE">Swedish</option>
+      <option value="tr-TR">Turkish</option>
+      <option value="cy-GB">Welsh</option>
+    </select>
+  </div>
+
+  <div class="form-row ">
+    <label for="node-input-debug"><span data-i18n="debug"></span></label>
+    <input type="checkbox" id="node-input-debug" />
+  </div>
+
+  <style>
+    #node-input-destinationType {
+      width: 100px;
+    }
+    #node-input-destinationEndpoint {
+      width: auto;
+    }
+    #node-input-prompts {
+      width: calc(100% - 105px);
+      height: 150px
+    }
+    .form-row-destination {
+      margin-top: 16px;
+    }
+    #node-input-debug {
+      width: auto;
+    }
+  </style>
+</script>
