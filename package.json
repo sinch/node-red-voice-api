@@ -1,6 +1,6 @@
 {
   "name": "@sinch/node-red-voice-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Sinch AB",
   "description": "Package of Sinch Voice API nodes for Node-RED",
   "homepage": "https://www.sinch.com/",
